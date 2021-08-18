@@ -14,5 +14,20 @@ get '/' do
 end
 
 get '/count' do
-  "カウントアプリ"
+  @number = Count.find(1).number
+  erb :index
+end
+
+post '/plus' do
+  count = Count.find(1)
+  count.number = count.number + 1
+  count.save
+  redirect '/count'
+end
+
+post '/minus' do
+  count = Count.find(1)
+  count.number = count.number - 1
+  count.save
+  redirect '/count'
 end
